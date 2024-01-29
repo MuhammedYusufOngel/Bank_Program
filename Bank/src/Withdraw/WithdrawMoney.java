@@ -42,7 +42,7 @@ public class WithdrawMoney extends Frame {
 	{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/mysql", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "password123");
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -93,7 +93,7 @@ public class WithdrawMoney extends Frame {
 				Connect();
 				
 				try {
-					staSelectUsers = con.prepareStatement("Select totalMoney from users where id=?");
+					staSelectUsers = con.prepareStatement("Select totalMoney from userinfos where userID=?");
 					staSelectUsers.setInt(1, id);
 					rsUsers = staSelectUsers.executeQuery();
 					
@@ -109,7 +109,7 @@ public class WithdrawMoney extends Frame {
 						}
 						else {
 							recentMoney -= amount;
-							staInsertPast = con.prepareStatement("insert into past(id,explanation,amount,history,revExp,recentMoney) values (?,?,?,?,?,?)");
+							staInsertPast = con.prepareStatement("insert into userpastexp(userID,explanation,amount,history,revExp,recentMoney) values (?,?,?,?,?,?)");
 							
 							staInsertPast.setInt(1, id);
 							staInsertPast.setString(2, explanationText.getText().toString());
@@ -120,7 +120,7 @@ public class WithdrawMoney extends Frame {
 							
 							staInsertPast.executeUpdate();
 							
-							staUpdateUsers = con.prepareStatement("update users set totalMoney=? where id=?");
+							staUpdateUsers = con.prepareStatement("update userinfos set totalMoney=? where userID=?");
 							
 							staUpdateUsers.setFloat(1, recentMoney);
 							staUpdateUsers.setInt(2, id);

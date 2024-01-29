@@ -42,7 +42,7 @@ public class ForgotPass extends Frame{
 	{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/mysql", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "password123");
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -110,7 +110,7 @@ public class ForgotPass extends Frame{
 						
 						try {
 							
-							statementSelect = con.prepareStatement("select username,password from users where username = ?");
+							statementSelect = con.prepareStatement("select username,password from userinfos where username = ?");
 							statementSelect.setString(1, user);
 							
 							rs = statementSelect.executeQuery();
@@ -237,7 +237,7 @@ public class ForgotPass extends Frame{
 						try {
 							String username = rs.getString(1);
 							
-							statementUpdate = con.prepareStatement("update users set password=? where username=?");
+							statementUpdate = con.prepareStatement("update userinfos set password=? where username=?");
 							
 							statementUpdate.setString(1, getMd5(passwordField.getText().toString()));
 							statementUpdate.setString(2, username);

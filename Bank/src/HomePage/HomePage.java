@@ -36,7 +36,7 @@ public class HomePage extends Frame{
 	{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/mysql", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "password123");
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -55,7 +55,7 @@ public class HomePage extends Frame{
 		
 		//After connect data base we select name and totalMoney and the program write label.
 		try {
-			statement = con.prepareStatement("select name,totalMoney from users where id = ?");
+			statement = con.prepareStatement("select name,totalMoney from userinfos where userID = ?");
 			statement.setInt(1, id);
 			
 			rs = statement.executeQuery();

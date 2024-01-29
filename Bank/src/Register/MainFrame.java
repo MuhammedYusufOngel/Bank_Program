@@ -32,7 +32,7 @@ public class MainFrame extends Frame{
 	{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/mysql", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "password123");
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -290,7 +290,7 @@ public class MainFrame extends Frame{
 				else if(label_warn_1.isVisible() == false || label_warn_2.isVisible() == false || label_warn_3.isVisible() == false || label_warn_4.isVisible() == false || label_warn_5.isVisible() == false)
 				{
 					try {
-						statement = con.prepareStatement("insert into users(name,surname,age,username,password,totalmoney)values(?,?,?,?,?,?)");
+						statement = con.prepareStatement("insert into userinfos(name,surname,age,username,password,totalMoney)values(?,?,?,?,?,?)");
 						
 						statement.setString(1, nameField.getText());
 						statement.setString(2, surnameField.getText());

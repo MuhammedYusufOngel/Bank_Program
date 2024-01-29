@@ -31,7 +31,7 @@ public class PastExpenses extends Frame{
 	{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/mysql", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "password123");
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -65,7 +65,7 @@ public class PastExpenses extends Frame{
 		
 		//We select the table (past) on the data base. End then the program transfer to table that we create.
 		try {
-			statement = con.prepareStatement("select explanation, amount, history, revExp, recentMoney from past where id = '" + id + "' order by id");
+			statement = con.prepareStatement("select explanation, amount, history, revExp, recentMoney from userpastexp where userID = '" + id + "' order by userID");
 								
 			rs = statement.executeQuery();
 				

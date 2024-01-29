@@ -34,13 +34,15 @@ public class Home extends Frame{
 	MainFrame mainFrame;
 	PreparedStatement statement;
 	ResultSet rs;
+	
+	//
 
 	//Its all about connect to our local host. We write firstly url and then username and password. And then we connect.
 	public void Connect()
 	{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/mysql", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/users", "root", "password123");
 		} 
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -171,7 +173,7 @@ public class Home extends Frame{
 						String pass = passwordField.getText();
 
 						//We connected the database. Now we select the table (users).
-						statement = con.prepareStatement("select id,name,username,password from users where username = ?");
+						statement = con.prepareStatement("select userID,name,username,password from userinfos where username = ?");
 						statement.setString(1, username);
 						rs = statement.executeQuery();
 						
